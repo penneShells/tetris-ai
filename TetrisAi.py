@@ -141,8 +141,6 @@ def main(genomes, config):
     figure = Figure(3,0)
     figure.__init__(figure.x, figure.y)
     
-    
-    
     loopthing = 0
     nets = []
     figures = []
@@ -154,18 +152,12 @@ def main(genomes, config):
         figures.append(figure)
         ge.append(g)
 
-    
-
     while not done:
         pressing_down = True
-        
-
-
-
 
         if not figures:
             done = True
-        
+    
         for figure in figures:
             if game.figure is None:
                 game.new_figure()
@@ -177,15 +169,12 @@ def main(genomes, config):
             if game.state == "start":
                 game.go_down()
                 
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
             if event.type == pygame.KEYDOWN:
                 if pygame.event.key == pygame.K_ESCAPE:
                     game.__init__(20, 10)
-
-
 
         screen.fill(WHITE)
 
@@ -240,12 +229,8 @@ def main(genomes, config):
                     for i1 in range(i, 1, -1):
                         for j in range(game.width):
                             game.field[i1][j] = game.field[i1 - 1][j]
-                            print(ge[x].fitness)
-                            ge[x].fitness += 5
             game.score += lines ** 2
-            
-            
-            
+            ge.fitness[figures.index(figure)] += 5
             
             if game.state == "gameover":
                 figures.pop(x)
@@ -256,16 +241,10 @@ def main(genomes, config):
                 game.__init__(20, 10)
                 if not figures:
                     break
-                
-            
-                
-        
-
         pygame.display.flip()
         clock.tick(fps)
 
     pygame.quit()
-
 
 def run(config_file):
     """
